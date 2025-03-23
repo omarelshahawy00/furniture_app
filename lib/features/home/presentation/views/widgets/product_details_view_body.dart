@@ -13,12 +13,18 @@ class ProductDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Color> colors = [
+      const Color(0xFF9E9487), // Brownish
+      const Color(0xFFFFB26B), // Orange
+      const Color(0xFF365B5E), // Dark teal
+    ];
+    const int selectedIndex = 0; // First one is selected
     return SingleChildScrollView(
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 32),
             child: CustomAppBar(
               showLeading: true,
               showSuffix: true,
@@ -28,6 +34,40 @@ class ProductDetailsViewBody extends StatelessWidget {
                   Icons.favorite_border_rounded,
                   size: 40,
                   color: ColorsManager.primaryColor,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: .19.sh,
+            left: 32,
+            child: Column(
+              children: List.generate(
+                3,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(selectedIndex == index ? 2 : 0),
+                      width: 38.r,
+                      height: 38.r,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          width: 2,
+                          color: selectedIndex == index
+                              ? ColorsManager.primaryColor
+                              : Colors.transparent,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: colors[index],
+                        radius: 16.r,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
