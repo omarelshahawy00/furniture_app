@@ -25,7 +25,7 @@ class CustomFavCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      // margin: const EdgeInsets.symmetric(horizontal: 24),
       width: double.infinity, // Responsive width
       height: 140.h, // Responsive height
       decoration: BoxDecoration(
