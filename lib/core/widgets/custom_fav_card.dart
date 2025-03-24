@@ -47,9 +47,9 @@ class CustomFavCard extends StatelessWidget {
                   child: Center(
                     child: Image.asset(
                       imageUrl,
-                      width: double.infinity,
                       height: double.infinity,
-                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
