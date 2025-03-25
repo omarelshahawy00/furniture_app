@@ -19,11 +19,12 @@ class CartItemsListView extends StatelessWidget {
           endActionPane: ActionPane(
             extentRatio: 0.25,
             motion: Container(
+              margin: const EdgeInsets.only(top: 10),
               decoration: const BoxDecoration(
                 color: ColorsManager.primaryColor,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
               ),
               child: const Center(

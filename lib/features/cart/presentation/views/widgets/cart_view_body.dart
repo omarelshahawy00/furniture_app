@@ -1,14 +1,9 @@
-import 'package:ecommerce_app/core/theme/colors_manager.dart';
-import 'package:ecommerce_app/core/theme/styles.dart';
-import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
-import 'package:ecommerce_app/core/widgets/custom_fav_card.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_items_list_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/items_total_price_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:gap/gap.dart';
 
 class CartViewBody extends StatelessWidget {
@@ -35,7 +30,8 @@ class CartViewBody extends StatelessWidget {
             CustomButton(
               text: 'Checkout',
               onPressed: () {},
-            )
+            ),
+            const Gap(25),
           ],
         ),
       ),
