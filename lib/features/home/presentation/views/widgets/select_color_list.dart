@@ -2,9 +2,15 @@ import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SelectColorList extends StatelessWidget {
+class SelectColorList extends StatefulWidget {
   const SelectColorList({super.key});
 
+  @override
+  State<SelectColorList> createState() => _SelectColorListState();
+}
+
+class _SelectColorListState extends State<SelectColorList> {
+  int selectedIndex = 0; // First one is selected
   @override
   Widget build(BuildContext context) {
     final List<Color> colors = [
@@ -12,15 +18,20 @@ class SelectColorList extends StatelessWidget {
       const Color(0xFFFFB26B), // Orange
       const Color(0xFF365B5E), // Dark teal
     ];
-    const int selectedIndex = 0; // First one is selected
+
     return Column(
       children: List.generate(
         3,
         (index) => Padding(
           padding: const EdgeInsets.only(top: 10),
           child: GestureDetector(
-            onTap: () {},
-            child: Container(
+            onTap: () {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.all(selectedIndex == index ? 2 : 0),
               width: 38.r,
               height: 38.r,
@@ -31,7 +42,7 @@ class SelectColorList extends StatelessWidget {
                   width: 2,
                   color: selectedIndex == index
                       ? ColorsManager.primaryColor
-                      : Colors.transparent,
+                      : ColorsManager.borderFilledColor,
                 ),
               ),
               child: CircleAvatar(

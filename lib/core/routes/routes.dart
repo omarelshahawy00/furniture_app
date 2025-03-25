@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/auth/login/presentation/views/login_view.
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/otp_verfication_view.dart';
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/sign_up_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
+import 'package:ecommerce_app/features/favorites/presentation/views/favorites_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/home_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/product_details_view.dart';
 import 'package:ecommerce_app/features/nav_bar/nav_bar.dart';
@@ -39,6 +40,11 @@ class AppRouter {
             path: Routes.cartView,
             name: Routes.cartView,
             builder: (context, state) => const CartView(),
+          ),
+            GoRoute(
+            path: Routes.favoritesView,
+            name: Routes.favoritesView,
+            builder: (context, state) => const FavoritesView(),
           ),
         ],
       ),
@@ -87,9 +93,8 @@ class Routes {
   static const String homeView = '/homeView';
   static const String productDetailsView = '/productDetailsView';
   static const String profileView = '/profileView';
-
   static const String cartView = '/cartView';
-
+  static const String favoritesView = '/favoritesView';
   static const String forgetPasswordView = '/forgetPasswordView';
   static const String otpVerificationView = '/otpVerificationView';
 }

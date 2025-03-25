@@ -1,8 +1,10 @@
+import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_fav_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 
 class CartItemsListView extends StatelessWidget {
   const CartItemsListView({super.key});
@@ -17,7 +19,7 @@ class CartItemsListView extends StatelessWidget {
         return Slidable(
           key: UniqueKey(),
           endActionPane: ActionPane(
-            extentRatio: 0.25,
+            extentRatio: 0.15,
             motion: Container(
               margin: const EdgeInsets.only(top: 10),
               decoration: const BoxDecoration(
@@ -53,6 +55,9 @@ class CartItemsListView extends StatelessWidget {
               title: 'Modern Chair',
               price: 100,
               imageUrl: AssetsManager.chair360,
+              onCardPressed: () {
+                context.pushNamed(Routes.productDetailsView);
+              },
               onAddToCartPressed: () {},
               onFavoritePressed: () {},
               rating: 4.5,

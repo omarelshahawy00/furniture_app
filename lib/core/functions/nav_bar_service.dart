@@ -16,7 +16,7 @@ class NavItemsService {
         "icon": AssetsManager.unactiveFav,
         "filledIcon": AssetsManager.activeFav,
         "title": 'Favorite',
-        "route": Routes.homeView,
+        "route": Routes.favoritesView,
       },
       {
         "icon": AssetsManager.unactiveCart,

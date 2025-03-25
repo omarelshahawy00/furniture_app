@@ -64,7 +64,11 @@ class ProductDetailsViewBody extends StatelessWidget {
           ),
           Positioned(
             top: MediaQuery.of(context).size.height * .44,
-            child: const ProductQuantityItem(),
+            child:  ProductQuantityItem(initialQuantity: 1,
+            onQuantityChanged: (p0) {
+                  
+            },
+            ),
           ),
         ],
       ),

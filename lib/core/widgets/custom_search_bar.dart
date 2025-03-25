@@ -18,7 +18,7 @@ class CustomSearchBar extends StatelessWidget {
     this.onCameraPressed,
     this.onChanged,
     this.showCameraIcon = true, // Default: Show camera icon
-    this.width, 
+    this.width,
   });
 
   @override
@@ -36,7 +36,7 @@ class CustomSearchBar extends StatelessWidget {
             const Icon(Icons.search, color: Colors.grey), // Search icon
             const SizedBox(width: 8),
             Expanded(
-              child: TextField(
+              child: TextFormField(
                 controller: controller,
                 onChanged: onChanged,
                 decoration: InputDecoration(
