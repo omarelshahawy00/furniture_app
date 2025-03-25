@@ -28,23 +28,22 @@ class HomeViewBody extends StatelessWidget {
             const Gap(25),
             Row(
               children: [
-                SvgPicture.asset(AssetsManager.notification),
+                SvgPicture.asset(
+                  AssetsManager.notification,
+                ),
                 const Gap(8),
-                const CustomSearchBar(),
+                const Expanded(child: CustomSearchBar()),
               ],
             ),
             Gap(25.h),
             const SaleItem(),
             const Gap(30),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'See all',
-                  style: Styles.medium16
-                      .copyWith(color: ColorsManager.primaryColor),
-                ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'See all',
+                style:
+                    Styles.medium16.copyWith(color: ColorsManager.primaryColor),
               ),
             ),
             const Gap(15),

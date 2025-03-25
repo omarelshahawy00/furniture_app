@@ -22,9 +22,9 @@ class FavoritesViewBody extends StatelessWidget {
               showSuffix: true,
             ),
             const Gap(30),
-            // const CustomSearchBar(
-            //   showCameraIcon: false,
-            // ),
+            const CustomSearchBar(
+              showCameraIcon: false,
+            ),
             const Gap(25),
             const CartItemsListView(),
             const Gap(25),

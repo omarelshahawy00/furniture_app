@@ -9,6 +9,7 @@ import 'package:ecommerce_app/features/favorites/presentation/views/favorites_vi
 import 'package:ecommerce_app/features/home/presentation/views/home_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/product_details_view.dart';
 import 'package:ecommerce_app/features/nav_bar/nav_bar.dart';
+import 'package:ecommerce_app/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,10 +42,15 @@ class AppRouter {
             name: Routes.cartView,
             builder: (context, state) => const CartView(),
           ),
-            GoRoute(
+          GoRoute(
             path: Routes.favoritesView,
             name: Routes.favoritesView,
             builder: (context, state) => const FavoritesView(),
+          ),
+          GoRoute(
+            path: Routes.profileView,
+            name: Routes.profileView,
+            builder: (context, state) => const ProfileView(),
           ),
         ],
       ),

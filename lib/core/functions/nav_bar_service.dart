@@ -34,7 +34,7 @@ class NavItemsService {
         "icon": AssetsManager.unactiveProfile,
         "filledIcon": AssetsManager.activeProfile,
         "title": 'Profile',
-        "route": Routes.homeView,
+        "route": Routes.profileView,
       },
     ];
     return navBarItemsData
