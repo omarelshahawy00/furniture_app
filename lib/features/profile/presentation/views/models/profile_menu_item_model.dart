@@ -1,33 +1,65 @@
+import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMenuItemModel {
   final String icon;
   final String title;
-  final VoidCallback onTap;
+  final String route;
 
   ProfileMenuItemModel(
-      {required this.icon, required this.title, required this.onTap});
+      {required this.icon, required this.title, required this.route});
 }
 
 final List<ProfileMenuItemModel> menuItems = [
   ProfileMenuItemModel(
-      icon: AssetsManager.cahrge, title: "History of order", onTap: () {}),
+    icon: AssetsManager.cahrge,
+    title: "History of order",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.payment, title: "Payment methods", onTap: () {}),
+    icon: AssetsManager.payment,
+    title: "Payment methods",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.notification, title: "Notifications", onTap: () {}),
+    icon: AssetsManager.notification,
+    title: "Notifications",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.award, title: "Reward card", onTap: () {}),
+    icon: AssetsManager.award,
+    title: "Reward card",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.promoCode, title: "Promo code", onTap: () {}),
+    icon: AssetsManager.promoCode,
+    title: "Promo code",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.privacy, title: "Privacy & policy", onTap: () {}),
+    icon: AssetsManager.privacy,
+    title: "Privacy & policy",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.language, title: "Language", onTap: () {}),
-  ProfileMenuItemModel(icon: AssetsManager.help, title: "Help", onTap: () {}),
+    icon: AssetsManager.language,
+    title: "Language",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.share, title: "Share app", onTap: () {}),
+    icon: AssetsManager.help,
+    title: "Help",
+    route: Routes.myOrdersView,
+  ),
   ProfileMenuItemModel(
-      icon: AssetsManager.logout, title: "Log out", onTap: () {}),
+    icon: AssetsManager.share,
+    title: "Share app",
+    route: Routes.myOrdersView,
+  ),
+  ProfileMenuItemModel(
+    icon: AssetsManager.logout,
+    title: "Log out",
+    route: Routes.myOrdersView,
+  ),
 ];

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
@@ -57,7 +58,10 @@ class ProfileViewBody extends StatelessWidget {
                   const NeverScrollableScrollPhysics(), // Prevent extra scrolling
               itemCount: menuItems.length,
               itemBuilder: (context, index) {
-                return ProfileItem(item: menuItems[index]);
+                return ProfileItem(
+                  item: menuItems[index],
+                  menuItems: menuItems,
+                );
               },
             )
           ],
@@ -69,17 +73,21 @@ class ProfileViewBody extends StatelessWidget {
 
 class ProfileItem extends StatelessWidget {
   final ProfileMenuItemModel item;
+  final List<ProfileMenuItemModel> menuItems;
   const ProfileItem({
     super.key,
     required this.item,
+    required this.menuItems,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: item.onTap,
+      onTap: () {
+        context.pushNamed(item.route);
+      },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: [
             SvgPicture.asset(

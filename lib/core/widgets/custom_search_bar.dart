@@ -2,6 +2,7 @@ import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
@@ -54,29 +55,34 @@ class CustomSearchBar extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(
-                  style: IconButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  icon: const Icon(
-                    Icons.mic_none,
-                    color: ColorsManager.primaryColor,
-                  ),
-                  onPressed: onMicPressed,
-                ),
-                if (showCameraIcon)
-                  IconButton(
+                Flexible(
+                  child: IconButton(
                     style: IconButton.styleFrom(
                       padding: EdgeInsets.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                     icon: const Icon(
-                      Icons.camera_alt_outlined,
+                      Icons.mic_none,
                       color: ColorsManager.primaryColor,
                     ),
-                    onPressed: onCameraPressed,
+                    onPressed: onMicPressed ?? () {},
                   ),
+                ),
+                if (showCameraIcon)
+                  Flexible(
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      icon: const Icon(
+                        Icons.camera_alt_outlined,
+                        color: ColorsManager.primaryColor,
+                      ),
+                      onPressed: onCameraPressed ?? () {},
+                    ),
+                  ),
+                const Gap(16),
               ],
             ),
           ),
