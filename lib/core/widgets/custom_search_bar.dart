@@ -2,6 +2,7 @@ import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
@@ -17,60 +18,79 @@ class CustomSearchBar extends StatelessWidget {
     this.onMicPressed,
     this.onCameraPressed,
     this.onChanged,
-    this.showCameraIcon = true, // Default: Show camera icon
-    this.width, 
+    this.showCameraIcon = true,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: width ?? double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        decoration: BoxDecoration(
-          color: ColorsManager.borderFilledColor, // Background color
-          borderRadius: BorderRadius.circular(25), // Rounded corners
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.search, color: Colors.grey), // Search icon
-            const SizedBox(width: 8),
-            Expanded(
-              child: TextField(
-                controller: controller,
-                onChanged: onChanged,
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  border: InputBorder.none, // Remove default border
-                  hintStyle: Styles.regular16
-                      .copyWith(color: ColorsManager.hintTextColor),
-                ),
-              ),
+    return SizedBox(
+      width: width ?? double.infinity, // Ensure full width
+      child: TextFormField(
+        controller: controller,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100),
+            borderSide: const BorderSide(
+              color: ColorsManager.borderFoucusColor,
             ),
-            IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              icon: const Icon(
-                Icons.mic_none,
-                color: ColorsManager.primaryColor,
-              ), // Mic icon
-              onPressed: onMicPressed,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: ColorsManager.borderFoucusColor,
             ),
-            if (showCameraIcon) // Conditionally show camera icon
-              IconButton(
-                style: IconButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          filled: true,
+          fillColor: ColorsManager.borderFilledColor,
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Colors.grey,
+          ),
+          suffixIcon: SizedBox(
+            width: showCameraIcon ? 80.w : 40.w,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    icon: const Icon(
+                      Icons.mic_none,
+                      color: ColorsManager.primaryColor,
+                    ),
+                    onPressed: onMicPressed ?? () {},
+                  ),
                 ),
-                icon: const Icon(
-                  Icons.camera_alt_outlined,
-                  color: ColorsManager.primaryColor,
-                ),
-                onPressed: onCameraPressed,
-              ),
-          ],
+                if (showCameraIcon)
+                  Flexible(
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      icon: const Icon(
+                        Icons.camera_alt_outlined,
+                        color: ColorsManager.primaryColor,
+                      ),
+                      onPressed: onCameraPressed ?? () {},
+                    ),
+                  ),
+                const Gap(16),
+              ],
+            ),
+          ),
+          hintText: 'Search',
+          border: InputBorder.none,
+          hintStyle: Styles.regular16.copyWith(
+            color: ColorsManager.hintTextColor,
+          ),
         ),
       ),
     );

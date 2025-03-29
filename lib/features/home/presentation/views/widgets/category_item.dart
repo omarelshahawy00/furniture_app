@@ -30,12 +30,14 @@ class CategoryItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(100.r),
       ),
       child: categoryItem.icon == null
-          ? Text(
-              categoryItem.title,
-              style: Styles.regular14.copyWith(
-                  color: selectedIndex == currentIndex
-                      ? Colors.white
-                      : ColorsManager.primaryColor),
+          ? Center(
+              child: Text(
+                categoryItem.title,
+                style: Styles.regular14.copyWith(
+                    color: selectedIndex == currentIndex
+                        ? Colors.white
+                        : ColorsManager.primaryColor),
+              ),
             )
           : Row(
               children: [

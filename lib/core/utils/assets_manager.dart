@@ -26,4 +26,18 @@ class AssetsManager {
   static const String chair360 = 'assets/images/360chair.png';
   static const String plusIcon = 'assets/icons/plus_icon.svg';
   static const String minusIcon = 'assets/icons/minus_icon.svg';
+  static const String person1 = 'assets/images/Ellipse1.png';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String logout = 'asset/sicons/bx_log-out.svg';
+  static const String payment = 'assets/icons/fluent_payment-24-regular.svg';
+  static const String language = 'assets/icons/ic_outline-language.svg';
+  static const String promoCode = 'assets/icons/ic_twotone-code.svg';
+  static const String help = 'assets/icons/ic_twotone-help-outline.svg';
+  static const String privacy =
+      'assets/icons/material-symbols_privacy-tip-outline.svg';
+  static const String share = 'assets/icons/material-symbols_share-outline.svg';
+
+  static const String cahrge = 'assets/icons/ri_battery-2-charge-line.svg';
+  static const String award =
+      'assets/icons/streamline_interface-favorite-award-ribbon-reward-like-social-rating-media.svg';
 }

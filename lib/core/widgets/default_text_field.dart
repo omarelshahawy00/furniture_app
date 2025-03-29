@@ -52,6 +52,7 @@ class DefaultTextField extends StatefulWidget {
 class _DefaultTextFieldState extends State<DefaultTextField> {
   final FocusNode _focusNode = FocusNode();
   late Color _fillColor;
+  bool showPass = true;
 
   @override
   void initState() {
@@ -80,7 +81,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       child: TextFormField(
         focusNode: _focusNode,
         enabled: widget.enabled,
-        obscureText: widget.isPassword ?? false,
+        obscureText: showPass && widget.isPassword == true,
         controller: widget.controller,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         maxLines: widget.maxLines ?? 1,
@@ -104,7 +105,18 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
             padding: const EdgeInsets.all(8),
             child: widget.prefixIcon,
           ),
-          suffixIcon: widget.suffixIcon,
+          suffixIcon: widget.isPassword == true && widget.suffixIcon == null
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      showPass = !showPass;
+                    });
+                  },
+                  icon: showPass == false
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                )
+              : widget.suffixIcon,
           suffixText: widget.suffixText,
           suffix: widget.suffix,
           fillColor: _fillColor,

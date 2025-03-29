@@ -1,13 +1,20 @@
 import 'package:ecommerce_app/core/app_cubit/change_category_cubit/change_catergory_cubit.dart';
 import 'package:ecommerce_app/core/app_cubit/layout/cubit/layout_cubit.dart';
+import 'package:ecommerce_app/core/di/di.dart';
+import 'package:ecommerce_app/features/auth/data/repo/auth_repo.dart';
+import 'package:ecommerce_app/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/login/presentation/views/forget_password_view.dart';
 import 'package:ecommerce_app/features/auth/login/presentation/views/login_view.dart';
+import 'package:ecommerce_app/features/auth/sign_up/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/otp_verfication_view.dart';
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/sign_up_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
+import 'package:ecommerce_app/features/favorites/presentation/views/favorites_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/home_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/product_details_view.dart';
 import 'package:ecommerce_app/features/nav_bar/nav_bar.dart';
+import 'package:ecommerce_app/features/profile/presentation/views/my_orders_view.dart';
+import 'package:ecommerce_app/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,18 +47,32 @@ class AppRouter {
             name: Routes.cartView,
             builder: (context, state) => const CartView(),
           ),
+          GoRoute(
+            path: Routes.favoritesView,
+            name: Routes.favoritesView,
+            builder: (context, state) => const FavoritesView(),
+          ),
+          GoRoute(
+            path: Routes.profileView,
+            name: Routes.profileView,
+            builder: (context, state) => const ProfileView(),
+          ),
         ],
       ),
-      GoRoute(path: '/', builder: (context, state) => const LoginView()),
       GoRoute(
-        path: Routes.loginView,
-        name: Routes.loginView,
-        builder: (context, state) => const LoginView(),
+        path: '/',
+        builder: (context, state) => BlocProvider(
+          create: (context) => LoginCubit(getIt.get<AuthRepo>()),
+          child: const LoginView(),
+        ),
       ),
       GoRoute(
         path: Routes.signUpView,
         name: Routes.signUpView,
-        builder: (context, state) => const SignUpView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => SignupCubit(getIt.get<AuthRepo>()),
+          child: const SignUpView(),
+        ),
       ),
       GoRoute(
         path: Routes.otpVerificationView,
@@ -74,6 +95,11 @@ class AppRouter {
         name: Routes.productDetailsView,
         builder: (context, state) => const ProductDetailsView(),
       ),
+      GoRoute(
+        path: Routes.myOrdersView,
+        name: Routes.myOrdersView,
+        builder: (context, state) => const MyOrdersView(),
+      ),
     ],
   );
 }
@@ -83,13 +109,12 @@ class Routes {
   static const String onBoardingView = "/onBoardingView";
   static const String loginView = '/loginView';
   static const String signUpView = '/signUpView';
-
+  static const String forgetPasswordView = '/forgetPasswordView';
+  static const String otpVerificationView = '/otpVerificationView';
   static const String homeView = '/homeView';
   static const String productDetailsView = '/productDetailsView';
   static const String profileView = '/profileView';
-
   static const String cartView = '/cartView';
-
-  static const String forgetPasswordView = '/forgetPasswordView';
-  static const String otpVerificationView = '/otpVerificationView';
+  static const String favoritesView = '/favoritesView';
+  static const String myOrdersView = '/myOrdersView';
 }

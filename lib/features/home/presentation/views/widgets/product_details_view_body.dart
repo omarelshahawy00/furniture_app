@@ -1,11 +1,12 @@
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
-import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/home/presentation/views/widgets/item_info_section.dart';
+import 'package:ecommerce_app/features/home/presentation/views/widgets/product_quantity_item.dart';
+import 'package:ecommerce_app/features/home/presentation/views/widgets/select_color_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
@@ -18,7 +19,7 @@ class ProductDetailsViewBody extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 32),
             child: CustomAppBar(
               showLeading: true,
               showSuffix: true,
@@ -32,6 +33,11 @@ class ProductDetailsViewBody extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+            top: .19.sh,
+            left: 32,
+            child: const SelectColorList(),
+          ),
           Column(
             children: [
               Image.asset(
@@ -43,67 +49,8 @@ class ProductDetailsViewBody extends StatelessWidget {
                 color: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Modern Chair',
-                            style: Styles.semiBold24,
-                          ),
-                          const Gap(8),
-                          const Icon(
-                            Icons.star,
-                            color: ColorsManager.primaryColor,
-                            size: 20,
-                          ),
-                          Text(
-                            " (4.5)",
-                            style: Styles.regular14.copyWith(
-                              color: ColorsManager.primaryColor,
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '\$100',
-                            style: Styles.semiBold24.copyWith(
-                              color: ColorsManager.primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Gap(25),
-                    Text('Details', style: Styles.regular16),
-                    Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      style: Styles.regular14.copyWith(
-                        color: ColorsManager.hintTextColor,
-                      ),
-                    ),
-                    const Gap(15),
-                    Row(
-                      children: List.generate(
-                        3,
-                        (index) => Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: ColorsManager.borderFilledColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.asset(
-                              AssetsManager.chair360,
-                              width: 60.r,
-                              height: 60.r,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    const ItemInfoSection(),
                     const Gap(25),
                     CustomButton(
                       text: 'Add to cart',
@@ -117,40 +64,10 @@ class ProductDetailsViewBody extends StatelessWidget {
           ),
           Positioned(
             top: MediaQuery.of(context).size.height * .44,
-            child: IntrinsicWidth(
-              child: Container(
-                padding: const EdgeInsets.all(7),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-                  decoration: BoxDecoration(
-                    color: const Color(0xff73888a),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                          onTap: () {},
-                          child: SvgPicture.asset(AssetsManager.plusIcon)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Text(
-                          '2',
-                          style: Styles.bold24.copyWith(color: Colors.white),
-                        ),
-                      ),
-                      InkWell(
-                          onTap: () {},
-                          child: SvgPicture.asset(AssetsManager.minusIcon)),
-                    ],
-                  ),
-                ),
-              ),
+            child:  ProductQuantityItem(initialQuantity: 1,
+            onQuantityChanged: (p0) {
+                  
+            },
             ),
           ),
         ],
