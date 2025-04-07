@@ -6,53 +6,68 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
-class CartItemsListView extends StatelessWidget {
-  const CartItemsListView({super.key});
+class CartItemsListView extends StatefulWidget {
+  final VoidCallback onItemRemoved;
+
+  const CartItemsListView({super.key, required this.onItemRemoved});
+
+  @override
+  State<CartItemsListView> createState() => _CartItemsListViewState();
+}
+
+class _CartItemsListViewState extends State<CartItemsListView> {
+  List<String> cartItems = [
+    'Modern Chair',
+    'Modern Chair',
+    'Modern Chair',
+    'Modern Chair',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 2,
+      itemCount: cartItems.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Slidable(
           key: UniqueKey(),
           endActionPane: ActionPane(
-            extentRatio: 0.15,
-            motion: Container(
-              margin: const EdgeInsets.only(top: 10),
-              decoration: const BoxDecoration(
-                color: ColorsManager.primaryColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-              ),
-              child: const Center(
-                  child: Icon(
-                Icons.delete,
-                color: Colors.white,
-                size: 30,
-              )),
+            extentRatio: 0.20,
+            motion: const ScrollMotion(),
+            dismissible: DismissiblePane(
+              onDismissed: () {
+                setState(() {
+                  cartItems.removeAt(index);
+                  widget.onItemRemoved(); // Notify the parent widget
+                });
+              },
             ),
             children: [
               SlidableAction(
+                spacing: 100,
                 onPressed: (context) {
-                  // Handle delete action
+                  setState(() {
+                    cartItems.removeAt(index);
+                    widget.onItemRemoved(); // Notify the parent widget
+                  });
                 },
                 padding: EdgeInsets.zero,
+                autoClose: true,
                 backgroundColor: ColorsManager.primaryColor,
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
-                label: 'Delete',
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                ),
               ),
             ],
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 10),
             child: CustomFavCard(
-              title: 'Modern Chair',
+              title: cartItems[index],
               price: 100,
               imageUrl: AssetsManager.chair360,
               onCardPressed: () {
@@ -61,6 +76,7 @@ class CartItemsListView extends StatelessWidget {
               onAddToCartPressed: () {},
               onFavoritePressed: () {},
               rating: 4.5,
+              isCartItem: true,
             ),
           ),
         );

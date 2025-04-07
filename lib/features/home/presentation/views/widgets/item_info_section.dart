@@ -34,14 +34,15 @@ class ItemInfoSection extends StatelessWidget {
                   color: ColorsManager.primaryColor,
                 ),
               ),
-              const Spacer(),
-              Text(
-                '\$100',
-                style: Styles.semiBold24.copyWith(
-                  color: ColorsManager.primaryColor,
-                ),
-              ),
             ],
+          ),
+        ),
+        Text(
+          '\$1200',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: Styles.semiBold24.copyWith(
+            color: ColorsManager.primaryColor,
           ),
         ),
         const Gap(25),
@@ -73,7 +74,6 @@ class ItemInfoSection extends StatelessWidget {
             ),
           ),
         ),
-        
       ],
     );
   }

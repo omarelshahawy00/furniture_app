@@ -1,0 +1,2 @@
+D:/OMAR/ZBOOMA_INTERN/ecommerce_app/android/app/.cxx/RelWithDebInfo/1a1r2d2r/x86_64/CMakeFiles/edit_cache.dir
+D:/OMAR/ZBOOMA_INTERN/ecommerce_app/android/app/.cxx/RelWithDebInfo/1a1r2d2r/x86_64/CMakeFiles/rebuild_cache.dir

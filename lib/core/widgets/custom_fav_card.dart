@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
+import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_quantity_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -12,6 +13,7 @@ class CustomFavCard extends StatelessWidget {
   final VoidCallback onFavoritePressed;
   final VoidCallback onAddToCartPressed;
   final VoidCallback? onCardPressed;
+  final bool isCartItem;
 
   const CustomFavCard({
     super.key,
@@ -22,6 +24,7 @@ class CustomFavCard extends StatelessWidget {
     required this.onFavoritePressed,
     required this.onAddToCartPressed,
     this.onCardPressed,
+    required this.isCartItem,
   });
 
   @override
@@ -71,7 +74,7 @@ class CustomFavCard extends StatelessWidget {
                 ],
               ),
             ),
-      
+
             // Right Section: Product Details & Add to Cart Button
             Expanded(
               flex: 3,
@@ -126,25 +129,30 @@ class CustomFavCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              IconButton(
-                                onPressed: onAddToCartPressed,
-                                style: IconButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                ),
-                                icon: Icon(
-                                  Icons.add_circle_outlined,
-                                  size: 40.r,
-                                  color: ColorsManager.primaryColor,
-                                ),
-                              ),
+                              isCartItem
+                                  ? CartQuantityItem(
+                                      onQuantityChanged: (p0) {},
+                                    )
+                                  : IconButton(
+                                      onPressed: onAddToCartPressed,
+                                      style: IconButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      icon: Icon(
+                                        Icons.add_circle_outlined,
+                                        size: 40.r,
+                                        color: ColorsManager.primaryColor,
+                                      ),
+                                    )
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-      
+
                   // Add to Cart Button
                 ],
               ),

@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
-import 'package:flutter/material.dart';
 
 class ProfileMenuItemModel {
   final String icon;

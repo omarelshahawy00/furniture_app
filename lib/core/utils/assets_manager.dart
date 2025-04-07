@@ -28,7 +28,7 @@ class AssetsManager {
   static const String minusIcon = 'assets/icons/minus_icon.svg';
   static const String person1 = 'assets/images/Ellipse1.png';
   static const String edit = 'assets/icons/edit.svg';
-  static const String logout = 'asset/sicons/bx_log-out.svg';
+  static const String logout = 'assets/icons/bx_log-out.svg';
   static const String payment = 'assets/icons/fluent_payment-24-regular.svg';
   static const String language = 'assets/icons/ic_outline-language.svg';
   static const String promoCode = 'assets/icons/ic_twotone-code.svg';

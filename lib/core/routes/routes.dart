@@ -10,9 +10,13 @@ import 'package:ecommerce_app/features/auth/sign_up/presentation/views/otp_verfi
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/sign_up_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
 import 'package:ecommerce_app/features/favorites/presentation/views/favorites_view.dart';
+import 'package:ecommerce_app/features/home/data/models/furniture_model.dart';
+import 'package:ecommerce_app/features/home/data/repos/home_repo.dart';
+import 'package:ecommerce_app/features/home/presentation/manager/fetch_home_data_cubit/fetch_home_data_cubit.dart';
 import 'package:ecommerce_app/features/home/presentation/views/home_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/product_details_view.dart';
 import 'package:ecommerce_app/features/nav_bar/nav_bar.dart';
+import 'package:ecommerce_app/features/place_order/presentation/views/place_order_view.dart';
 import 'package:ecommerce_app/features/profile/presentation/views/my_orders_view.dart';
 import 'package:ecommerce_app/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,8 +41,17 @@ class AppRouter {
           GoRoute(
             path: Routes.homeView,
             name: Routes.homeView,
-            builder: (context, state) => BlocProvider(
-              create: (context) => ChangeCatergoryCubit(),
+            builder: (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => ChangeCatergoryCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => FetchHomeDataCubit(
+                    getIt.get<HomeRepo>(),
+                  )..fetchHomeData(),
+                ),
+              ],
               child: const HomeView(),
             ),
           ),
@@ -61,6 +74,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/',
+        name: Routes.loginView,
         builder: (context, state) => BlocProvider(
           create: (context) => LoginCubit(getIt.get<AuthRepo>()),
           child: const LoginView(),
@@ -93,12 +107,19 @@ class AppRouter {
       GoRoute(
         path: Routes.productDetailsView,
         name: Routes.productDetailsView,
-        builder: (context, state) => const ProductDetailsView(),
+        builder: (context, state) {
+          return const ProductDetailsView();
+        },
       ),
       GoRoute(
         path: Routes.myOrdersView,
         name: Routes.myOrdersView,
         builder: (context, state) => const MyOrdersView(),
+      ),
+      GoRoute(
+        path: Routes.placeOrderView,
+        name: Routes.placeOrderView,
+        builder: (context, state) => const PlaceOrderView(),
       ),
     ],
   );
@@ -117,4 +138,5 @@ class Routes {
   static const String cartView = '/cartView';
   static const String favoritesView = '/favoritesView';
   static const String myOrdersView = '/myOrdersView';
+  static const String placeOrderView = '/placeOrderView';
 }
