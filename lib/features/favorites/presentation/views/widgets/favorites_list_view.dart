@@ -6,37 +6,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
-class CartItemsListView extends StatelessWidget {
-  const CartItemsListView({super.key});
+class FavoritesListView extends StatelessWidget {
+  const FavoritesListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 10,
+      itemCount: 2,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Slidable(
           key: UniqueKey(),
           endActionPane: ActionPane(
-            extentRatio: 0.20,
-            motion: const ScrollMotion(),
-            dismissible: DismissiblePane(
-              onDismissed: () {},
+            extentRatio: 0.15,
+            motion: Container(
+              margin: const EdgeInsets.only(top: 10),
+              decoration: const BoxDecoration(
+                color: ColorsManager.primaryColor,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+              ),
+              child: const Center(
+                  child: Icon(
+                Icons.delete,
+                color: Colors.white,
+                size: 30,
+              )),
             ),
             children: [
               SlidableAction(
-                spacing: 100,
-                onPressed: (context) {},
+                onPressed: (context) {
+                  // Handle delete action
+                },
                 padding: EdgeInsets.zero,
-                autoClose: true,
                 backgroundColor: ColorsManager.primaryColor,
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                ),
+                label: 'Delete',
               ),
             ],
           ),
@@ -52,7 +61,7 @@ class CartItemsListView extends StatelessWidget {
               onAddToCartPressed: () {},
               onFavoritePressed: () {},
               rating: 4.5,
-              isCartItem: true,
+              isCartItem: false,
             ),
           ),
         );

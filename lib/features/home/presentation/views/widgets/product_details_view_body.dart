@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/home/data/models/furniture_model.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/item_info_section.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/product_quantity_item.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/select_color_list.dart';
@@ -10,7 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
-  const ProductDetailsViewBody({super.key});
+  const ProductDetailsViewBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +37,17 @@ class ProductDetailsViewBody extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: .19.sh,
-            left: 32,
-            child: const SelectColorList(),
-          ),
           Column(
             children: [
+              const Gap(30),
               Image.asset(
-                height: MediaQuery.of(context).size.height * 0.485,
-                AssetsManager.chair360,
-                fit: BoxFit.cover,
+                AssetsManager.sofa,
+                // height: MediaQuery.of(context).size.height * 0.485,
+                height: 250,
+
+                fit: BoxFit.contain,
               ),
+              const Gap(80),
               Container(
                 color: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -63,11 +66,15 @@ class ProductDetailsViewBody extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * .44,
-            child:  ProductQuantityItem(initialQuantity: 1,
-            onQuantityChanged: (p0) {
-                  
-            },
+            top: .19.sh,
+            left: 32.w,
+            child: const SelectColorList(),
+          ),
+          Positioned(
+            top: 328,
+            child: ProductQuantityItem(
+              initialQuantity: 1,
+              onQuantityChanged: (p0) {},
             ),
           ),
         ],

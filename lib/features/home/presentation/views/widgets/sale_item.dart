@@ -29,11 +29,13 @@ class SaleItem extends StatelessWidget {
                 color: const Color(0xff9B5619),
                 fontFamily: GoogleFonts.lobster().fontFamily),
           ),
-          Image.asset(
-            AssetsManager.chair,
-            height: 130,
-            width: 160,
-            fit: BoxFit.cover,
+          Expanded(
+            child: Image.asset(
+              AssetsManager.chair,
+              // height: 120.h,
+              // width: 140.w,
+              fit: BoxFit.cover,
+            ),
           ),
         ],
       ),

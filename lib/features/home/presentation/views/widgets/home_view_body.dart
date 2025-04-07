@@ -1,13 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_card_item.dart';
 import 'package:ecommerce_app/core/widgets/custom_search_bar.dart';
+import 'package:ecommerce_app/features/home/presentation/manager/fetch_home_data_cubit/fetch_home_data_cubit.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/category_items_bloc_builder.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/category_list_view_item.dart';
-import 'package:ecommerce_app/features/home/presentation/views/widgets/list_header_item.dart';
+import 'package:ecommerce_app/features/home/presentation/views/widgets/my_carousel_with_indicator.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/sale_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -36,7 +39,7 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             Gap(25.h),
-            const SaleItem(),
+            const CustomCarouselWithIndicator(),
             const Gap(30),
             TextButton(
               onPressed: () {},
@@ -49,21 +52,37 @@ class HomeViewBody extends StatelessWidget {
             const Gap(15),
             const CategoryItemsBlocBuilder(),
             const Gap(30),
-            const CategoryListViewItem(
-              // onProductPressed: () {},
-              headerTitle: 'Sofa',
-              imageUrl: AssetsManager.sofa,
-              productTitle: 'Sofa',
-              productPrice: 100,
-              productRating: 4.5,
+            BlocBuilder<FetchHomeDataCubit, FetchHomeDataState>(
+              builder: (context, state) {
+                if (state is FetchHomeDataSuccess) {
+                  return CategoryListViewItem(
+                    furniturList: state.furnitureList,
+                    // onProductPressed: () {},
+                    headerTitle: 'Sofa',
+                    // imageUrl: AssetsManager.sofa,
+                    // productTitle: 'Sofa',
+                    // productPrice: 100,
+                    // productRating: 4.5,
+                  );
+                } else if (state is FetchHomeDataFailure) {
+                  return const Center(
+                    child: Text('Error loading data'),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
             const Gap(34),
             const CategoryListViewItem(
+              furniturList: [],
               headerTitle: 'Chair',
-              imageUrl: AssetsManager.chair,
-              productTitle: 'Chair',
-              productPrice: 50,
-              productRating: 4.5,
+              // imageUrl: AssetsManager.chair,
+              // productTitle: 'Chair',
+              // productPrice: 50,
+              // productRating: 4.5,
             ),
           ],
         ),

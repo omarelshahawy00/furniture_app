@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductQuantityItem extends StatefulWidget {
+class CartQuantityItem extends StatefulWidget {
   final int initialQuantity;
   final Function(int) onQuantityChanged;
-
-  const ProductQuantityItem({
+  const CartQuantityItem({
     super.key,
     this.initialQuantity = 1,
     required this.onQuantityChanged,
   });
 
   @override
-  State<ProductQuantityItem> createState() => _ProductQuantityItemState();
+  State<CartQuantityItem> createState() => _CartQuantityItemState();
 }
 
-class _ProductQuantityItemState extends State<ProductQuantityItem> {
+class _CartQuantityItemState extends State<CartQuantityItem> {
   late int quantity;
 
   @override
@@ -42,14 +41,10 @@ class _ProductQuantityItemState extends State<ProductQuantityItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        color: Colors.white, // Background color
-        borderRadius: BorderRadius.circular(50.r),
-      ),
+    return GestureDetector(
+      onTap: () {},
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: const Color(0xFF73888a), // Background color
           borderRadius: BorderRadius.circular(30.r),
@@ -62,11 +57,11 @@ class _ProductQuantityItemState extends State<ProductQuantityItem> {
 
             // Quantity Number
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Text(
                 '$quantity',
                 style: TextStyle(
-                  fontSize: 18.sp,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -85,6 +80,8 @@ class _ProductQuantityItemState extends State<ProductQuantityItem> {
     return InkWell(
       onTap: onPressed,
       child: Container(
+        width: 25.w,
+        height: 20.h,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -93,7 +90,7 @@ class _ProductQuantityItemState extends State<ProductQuantityItem> {
         ),
         child: Icon(
           icon,
-          size: 30.r,
+          size: 15.r,
           color: const Color(0xFF577173), // Icon color
         ),
       ),
