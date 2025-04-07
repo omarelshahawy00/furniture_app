@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_item
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/items_total_price_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,6 +53,14 @@ class _CartViewBodyState extends State<CartViewBody> {
     });
   }
 
+  void _onItemRemoved() {
+    if (!_showBottomBar) {
+      setState(() {
+        _showBottomBar = true; // Show bottom bar when item is removed
+      });
+    }
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -65,16 +74,18 @@ class _CartViewBodyState extends State<CartViewBody> {
         SingleChildScrollView(
           controller: _scrollController,
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: const Column(
+          child: Column(
             children: [
-              CustomAppBar(
+              const CustomAppBar(
                 showTitle: true,
                 title: 'My Cart',
                 showSuffix: true,
               ),
-              Gap(30),
-              CartItemsListView(),
-              Gap(200), // Space for bottom bar
+              const Gap(30),
+              CartItemsListView(
+                onItemRemoved: _onItemRemoved,
+              ),
+              Gap(220.h), // Space for bottom bar
             ],
           ),
         ),
@@ -85,25 +96,34 @@ class _CartViewBodyState extends State<CartViewBody> {
           right: 24,
           bottom: 24,
           child: _atListEnd
-              ? Column(
-                  children: [
-                    const ItemsTotalPriceSection(),
-                    const Gap(12),
-                    CustomButton(
-                      text: 'Checkout',
-                      onPressed: () {
-                        context.pushNamed(Routes.placeOrderView);
-                      },
-                    ),
-                  ],
-                )
-              : AnimatedSlide(
-                  offset: _showBottomBar ? Offset.zero : const Offset(0, 2),
-                  duration: const Duration(milliseconds: 300),
+              ? AnimatedSlide(
+                  offset: _showBottomBar ? Offset.zero : const Offset(0, 1),
+                  duration: const Duration(milliseconds: 800),
                   curve: Curves.easeInOut,
                   child: AnimatedOpacity(
                     opacity: _showBottomBar ? 1 : 0,
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 800),
+                    child: Column(
+                      children: [
+                        const ItemsTotalPriceSection(),
+                        const Gap(12),
+                        CustomButton(
+                          text: 'Checkout',
+                          onPressed: () {
+                            context.pushNamed(Routes.placeOrderView);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : AnimatedSlide(
+                  offset: _showBottomBar ? Offset.zero : const Offset(0, 1),
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeInOut,
+                  child: AnimatedOpacity(
+                    opacity: _showBottomBar ? 1 : 0,
+                    duration: const Duration(milliseconds: 800),
                     child: Column(
                       children: [
                         const ItemsTotalPriceSection(),

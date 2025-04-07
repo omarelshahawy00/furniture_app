@@ -6,16 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
-class CartItemsListView extends StatefulWidget {
-  final VoidCallback onItemRemoved;
-
-  const CartItemsListView({super.key, required this.onItemRemoved});
+class MyOrdersListView extends StatefulWidget {
+  const MyOrdersListView({super.key});
 
   @override
-  State<CartItemsListView> createState() => _CartItemsListViewState();
+  State<MyOrdersListView> createState() => _MyOrdersListViewState();
 }
 
-class _CartItemsListViewState extends State<CartItemsListView> {
+class _MyOrdersListViewState extends State<MyOrdersListView> {
   List<String> cartItems = [
     'Modern Chair',
     'Modern Chair',
@@ -39,7 +37,7 @@ class _CartItemsListViewState extends State<CartItemsListView> {
               onDismissed: () {
                 setState(() {
                   cartItems.removeAt(index);
-                  widget.onItemRemoved(); // Notify the parent widget
+                  
                 });
               },
             ),
@@ -49,7 +47,7 @@ class _CartItemsListViewState extends State<CartItemsListView> {
                 onPressed: (context) {
                   setState(() {
                     cartItems.removeAt(index);
-                    widget.onItemRemoved(); // Notify the parent widget
+                    
                   });
                 },
                 padding: EdgeInsets.zero,

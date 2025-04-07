@@ -2,6 +2,7 @@ import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
 import 'package:ecommerce_app/core/widgets/custom_search_bar.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_items_list_view.dart';
+import 'package:ecommerce_app/features/profile/presentation/views/widgets/my_orders_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -26,7 +27,7 @@ class MyOrdersViewBody extends StatelessWidget {
               showCameraIcon: false,
             ),
             const Gap(25),
-            const CartItemsListView(),
+            const MyOrdersListView(),
             const Gap(25),
             CustomButton(
               text: 'You have 3 items in cart',

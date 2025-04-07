@@ -39,7 +39,7 @@ class AppRouter {
         },
         routes: [
           GoRoute(
-            path: '/',
+            path: Routes.homeView,
             name: Routes.homeView,
             builder: (context, state) => MultiBlocProvider(
               providers: [
@@ -73,7 +73,7 @@ class AppRouter {
         ],
       ),
       GoRoute(
-        path: Routes.loginView,
+        path: '/',
         name: Routes.loginView,
         builder: (context, state) => BlocProvider(
           create: (context) => LoginCubit(getIt.get<AuthRepo>()),
@@ -108,8 +108,7 @@ class AppRouter {
         path: Routes.productDetailsView,
         name: Routes.productDetailsView,
         builder: (context, state) {
-         
-          return ProductDetailsView();
+          return const ProductDetailsView();
         },
       ),
       GoRoute(
