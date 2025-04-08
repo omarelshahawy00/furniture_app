@@ -13,8 +13,11 @@ import 'package:ecommerce_app/features/favorites/presentation/views/favorites_vi
 import 'package:ecommerce_app/features/home/data/models/furniture_model.dart';
 import 'package:ecommerce_app/features/home/data/repos/home_repo.dart';
 import 'package:ecommerce_app/features/home/presentation/manager/fetch_home_data_cubit/fetch_home_data_cubit.dart';
+import 'package:ecommerce_app/features/home/presentation/views/category_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/home_view.dart';
+import 'package:ecommerce_app/features/home/presentation/views/models/category_item_model.dart';
 import 'package:ecommerce_app/features/home/presentation/views/product_details_view.dart';
+import 'package:ecommerce_app/features/home/presentation/views/see_all_category_view.dart';
 import 'package:ecommerce_app/features/nav_bar/nav_bar.dart';
 import 'package:ecommerce_app/features/place_order/presentation/views/place_order_view.dart';
 import 'package:ecommerce_app/features/profile/presentation/views/my_orders_view.dart';
@@ -121,6 +124,21 @@ class AppRouter {
         name: Routes.placeOrderView,
         builder: (context, state) => const PlaceOrderView(),
       ),
+      GoRoute(
+        path: Routes.seeAllCategoryView,
+        name: Routes.seeAllCategoryView,
+        builder: (context, state) => const SeeAllCategoryView(),
+      ),
+      GoRoute(
+        path: Routes.categoryView,
+        name: Routes.categoryView,
+        builder: (context, state) {
+          final categoryItem = state.extra as CategoryItemModel;
+          return CategoryView(
+            categoryItem: categoryItem,
+          );
+        },
+      ),
     ],
   );
 }
@@ -139,4 +157,6 @@ class Routes {
   static const String favoritesView = '/favoritesView';
   static const String myOrdersView = '/myOrdersView';
   static const String placeOrderView = '/placeOrderView';
+  static const String seeAllCategoryView = '/seeAllCategoryView';
+  static const String categoryView = '/categoryView';
 }

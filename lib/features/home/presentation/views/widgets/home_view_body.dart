@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -26,7 +28,7 @@ class HomeViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Gap(40),
+            const Gap(20),
             homeViewAppBar(context, title: 'Let’s furnish your\nhome'),
             const Gap(25),
             Row(
@@ -42,7 +44,10 @@ class HomeViewBody extends StatelessWidget {
             const CustomCarouselWithIndicator(),
             const Gap(30),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(Routes.seeAllCategoryView ,
+                    extra: 'See all categories');
+              },
               child: Text(
                 'See all',
                 style:

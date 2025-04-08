@@ -38,11 +38,8 @@ class AuthRepoImpl implements AuthRepo {
         data: loginReqModel.toJson(),
       );
       final res = LoginResModel.fromJson(response);
-      if (res.status == 'error') {
-        return Left(ServerFailure(res.message!));
-      } else {
-        return Right(LoginResModel.fromJson(response));
-      }
+
+      return Right(res);
     } on DioException catch (e) {
       return Left(ServerFailure.fromDioError(e));
     } catch (e) {

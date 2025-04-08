@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/functions/show_custom_dialog.dart';
 import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/login/presentation/views/widgets/login_view_body.dart';
@@ -28,12 +29,10 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         switch (state) {
           case LoginLoading():
-            showDialog(
-              context: context,
-              builder: (context) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            showCustomDialog(
+                context: context,
+                type: DialogType.loading,
+                message: 'Loading...');
             break;
           case LoginSuccess():
             context.pop();
@@ -41,10 +40,10 @@ class LoginBlocListener extends StatelessWidget {
             break;
           case LoginError():
             context.pop();
-            showDialog(
+            showCustomDialog(
                 context: context,
-                builder: (context) =>
-                    AlertDialog(content: Text(state.errMessage)));
+                type: DialogType.failure,
+                message: state.errMessage);
             break;
           default:
             break;

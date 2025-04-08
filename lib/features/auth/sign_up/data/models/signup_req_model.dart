@@ -7,12 +7,14 @@ class SignupReqModel {
   final String? password;
   final String? name;
   final String? phone;
+  final String? address;
 
-  SignupReqModel({
+  SignupReqModel( {
     this.email,
     this.password,
     this.name,
     this.phone,
+    this.address,
   });
 
   Map<String, dynamic> toJson() => _$SignupReqModelToJson(this);

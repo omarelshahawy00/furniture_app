@@ -21,6 +21,9 @@ class _CartItemsListViewState extends State<CartItemsListView> {
     'Modern Chair',
     'Modern Chair',
     'Modern Chair',
+    'Modern Chair',
+    'Modern Chair',
+    'Modern Chair',
   ];
 
   @override

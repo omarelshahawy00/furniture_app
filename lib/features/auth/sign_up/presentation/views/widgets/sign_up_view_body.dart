@@ -28,12 +28,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _addressController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -41,11 +45,15 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     if (_formKey.currentState!.validate()) {
       // form is valid
       final userData = SignupReqModel(
-          email: _emailController.text,
-          name: _nameController.text,
-          password: _passwordController.text);
+        email: _emailController.text,
+        name: _nameController.text,
+        password: _passwordController.text,
+        address: _addressController.text,
+        phone: _phoneController.text,
+      );
 
       context.read<SignupCubit>().signup(userData);
+      
     }
   }
 
@@ -78,8 +86,26 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 hintText: 'Full Name',
                 validator: MyValidators.displayNameValidator,
               ),
+              // address
               const Gap(19),
-
+              DefaultTextField(
+                controller: _addressController,
+                hintText: 'Address',
+                validator: (p0) {
+                  if (p0 == null || p0.isEmpty) {
+                    return 'Please enter your address';
+                  }
+                  return null;
+                },
+              ),
+              const Gap(19),
+              // Email or Phone
+              DefaultTextField(
+                controller: _phoneController,
+                hintText: 'Phone Number',
+                validator: MyValidators.phoneValidator,
+              ),
+              const Gap(19),
               // Email or Phone
               DefaultTextField(
                 controller: _emailController,

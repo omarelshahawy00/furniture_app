@@ -9,8 +9,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await getItSetup();
   Bloc.observer = CustomBlocObserver();
-  runApp(DevicePreview(
-    enabled: true,
-    builder: (context) => const EcommerceApp(),
-  ));
+  runApp(
+    const EcommerceApp(),
+  );
+  // runApp(DevicePreview(
+  //   enabled: true,
+  //   builder: (context) => const EcommerceApp(),
+  // ));
 }

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/functions/show_custom_dialog.dart';
 import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/features/auth/sign_up/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:ecommerce_app/features/auth/sign_up/presentation/views/widgets/sign_up_view_body.dart';
@@ -27,24 +28,28 @@ class SignUpBlocListener extends StatelessWidget {
       listener: (context, state) {
         switch (state) {
           case SignupLoading():
-            showDialog(
+            showCustomDialog(
               context: context,
-              builder: (context) => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              type: DialogType.loading,
+              message: 'Loading...',
             );
             break;
           case SignupSuccess():
             context.pop();
             context.pop();
+            showCustomDialog(
+              context: context,
+              type: DialogType.success,
+              message: 'Account created successfully!',
+            );
+
             break;
           case SignupError():
             context.pop();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errMessage),
-              ),
-            );
+            showCustomDialog(
+                context: context,
+                type: DialogType.failure,
+                message: state.errMessage);
             break;
           default:
             break;

@@ -40,4 +40,7 @@ class AssetsManager {
   static const String cahrge = 'assets/icons/ri_battery-2-charge-line.svg';
   static const String award =
       'assets/icons/streamline_interface-favorite-award-ribbon-reward-like-social-rating-media.svg';
+      static const String loading = 'assets/images/loading.json';
+  static const String fail = 'assets/images/fail.json';
+  static const String success = 'assets/images/success.json';
 }

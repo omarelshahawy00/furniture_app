@@ -64,14 +64,23 @@ class ServerFailure extends Failure {
     if (statusCode == 400 ||
         statusCode == 401 ||
         statusCode == 403 ||
-        statusCode == 422) {
+        statusCode == 422 ||
+        statusCode == 409) {
+      // Check if 'errors' is a map and has at least one key
+      if (response.errors is Map && (response.errors as Map).isNotEmpty) {
+        final errorMap = response.errors as Map;
+        final firstKey = errorMap.keys.first;
+        final firstMessage = errorMap[firstKey];
+        return ServerFailure(firstMessage.toString());
+      }
+
       return ServerFailure(response.message.toString());
     } else if (statusCode == 404) {
       return ServerFailure('Your request not found, Please try later!');
     } else if (statusCode == 500) {
-      return ServerFailure('Internal Server error, Please try later');
+      return ServerFailure('User Name Already Exist!');
     } else {
-      return ServerFailure('Opps There was an Error, Please try again');
+      return ServerFailure('Oops! There was an Error, Please try again');
     }
   }
 }

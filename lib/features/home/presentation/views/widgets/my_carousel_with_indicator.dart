@@ -45,20 +45,25 @@ class _CustomCarouselWithIndicatorState
           ),
           items: List.generate(3, (index) => const SaleItem()),
         ),
+
         // Indicator Row
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            3,
-            (index) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              width: _currentIndex == index ? 12.0 : 8.0,
-              height: _currentIndex == index ? 12.0 : 8.0,
-              decoration: BoxDecoration(
-                color: _currentIndex == index
-                    ? ColorsManager.primaryColor
-                    : Colors.grey,
-                shape: BoxShape.circle,
+        SizedBox(
+          height: 20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              3,
+              (index) => AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: _currentIndex == index ? 12.0 : 8.0,
+                height: _currentIndex == index ? 12.0 : 8.0,
+                decoration: BoxDecoration(
+                  color: _currentIndex == index
+                      ? ColorsManager.primaryColor
+                      : Colors.grey,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),

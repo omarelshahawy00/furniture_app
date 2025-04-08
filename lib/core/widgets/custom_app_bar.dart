@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Gap(40),
+        const Gap(20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
