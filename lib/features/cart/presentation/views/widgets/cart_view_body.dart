@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/core/routes/routes.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/cart/data/models/cart_item_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_items_list_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/items_total_price_section.dart';
 import 'package:flutter/material.dart';
@@ -30,20 +31,18 @@ class _CartViewBodyState extends State<CartViewBody> {
       final maxScroll = _scrollController.position.maxScrollExtent;
       final currentScroll = _scrollController.position.pixels;
 
-      // Step 3: Detect if user reached the bottom
       if (currentScroll >= maxScroll - 200) {
         if (!_atListEnd) {
           setState(() {
             _atListEnd = true;
-            _showBottomBar = true; // Fix it in place
+            _showBottomBar = true;
           });
         }
       } else {
         if (_atListEnd) {
-          setState(() => _atListEnd = false); // Enable behavior again
+          setState(() => _atListEnd = false);
         }
 
-        // Step 1 & 2: Toggle behavior only when NOT at the end
         if (direction == ScrollDirection.forward && _showBottomBar) {
           setState(() => _showBottomBar = false);
         } else if (direction == ScrollDirection.reverse && !_showBottomBar) {
@@ -56,9 +55,17 @@ class _CartViewBodyState extends State<CartViewBody> {
   void _onItemRemoved() {
     if (!_showBottomBar) {
       setState(() {
-        _showBottomBar = true; // Show bottom bar when item is removed
+        _showBottomBar = true;
       });
     }
+  }
+
+  double _calculateTotalPrice() {
+    double totalPrice = 0.0;
+    for (var cartItem in CartService.cartItems) {
+      totalPrice += cartItem.furniture.price! * cartItem.quantity;
+    }
+    return totalPrice;
   }
 
   @override
@@ -69,6 +76,8 @@ class _CartViewBodyState extends State<CartViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final totalPrice = _calculateTotalPrice();
+
     return Stack(
       children: [
         SingleChildScrollView(
@@ -85,12 +94,10 @@ class _CartViewBodyState extends State<CartViewBody> {
               CartItemsListView(
                 onItemRemoved: _onItemRemoved,
               ),
-              Gap(220.h), // Space for bottom bar
+              Gap(220.h),
             ],
           ),
         ),
-
-        // Bottom Checkout Section
         Positioned(
           left: 24,
           right: 24,
@@ -105,7 +112,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                     duration: const Duration(milliseconds: 800),
                     child: Column(
                       children: [
-                        const ItemsTotalPriceSection(),
+                        ItemsTotalPriceSection(totalPrice: totalPrice),
                         const Gap(12),
                         CustomButton(
                           text: 'Checkout',
@@ -126,7 +133,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                     duration: const Duration(milliseconds: 800),
                     child: Column(
                       children: [
-                        const ItemsTotalPriceSection(),
+                        ItemsTotalPriceSection(totalPrice: totalPrice),
                         const Gap(12),
                         CustomButton(
                           text: 'Checkout',

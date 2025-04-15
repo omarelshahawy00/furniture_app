@@ -2,8 +2,10 @@ import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/theme/styles.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
+import 'package:ecommerce_app/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/profile/presentation/views/models/profile_menu_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -84,6 +86,9 @@ class ProfileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        if (item.title == 'Log out') {
+          context.read<LoginCubit>().signOut();
+        }
         context.pushNamed(item.route);
       },
       child: Container(

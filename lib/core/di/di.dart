@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/core/network/services/api_service.dart';
+import 'package:ecommerce_app/core/network/services/data_base_service.dart';
+import 'package:ecommerce_app/core/network/services/fire_store_service.dart';
+import 'package:ecommerce_app/core/network/services/firebase_auth_service.dart';
 import 'package:ecommerce_app/features/auth/data/repo/auth_repo.dart';
 import 'package:ecommerce_app/features/auth/data/repo_impl/auth_repo_impl.dart';
 import 'package:ecommerce_app/features/auth/login/presentation/manager/login_cubit/login_cubit.dart';
@@ -13,10 +16,18 @@ final getIt = GetIt.instance;
 
 Future<void> getItSetup() async {
   getIt.registerSingleton<ApiService>(ApiService(dio: Dio()));
-
+  getIt.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
+   
+getIt.registerSingleton<DataBaseService>(FireStoreService());
   getIt.registerSingleton<AuthRepo>(
-      AuthRepoImpl(apiService: getIt<ApiService>()));
-
+    AuthRepoImpl(
+    authService:   getIt<FirebaseAuthService>(),
+    firestore:  getIt<DataBaseService>(),
+    ),
+  );
+  // getIt.registerSingleton<AuthRepo>(
+  //     AuthRepoImpl(apiService: getIt<ApiService>()));
+ 
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<AuthRepo>()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt<AuthRepo>()));
   getIt.registerSingleton<HomeRepo>(HomeRepoImpl());

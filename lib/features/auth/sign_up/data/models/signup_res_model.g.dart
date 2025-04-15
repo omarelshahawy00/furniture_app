@@ -8,12 +8,18 @@ part of 'signup_res_model.dart';
 
 SignupResModel _$SignupResModelFromJson(Map<String, dynamic> json) =>
     SignupResModel(
-      message: json['message'] as String?,
-      status: json['status'] as String?,
+      id: json['id'] as String,
+      email: json['email'] as String,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+      address: json['address'] as String?,
     );
 
 Map<String, dynamic> _$SignupResModelToJson(SignupResModel instance) =>
     <String, dynamic>{
-      'message': instance.message,
-      'status': instance.status,
+      'id': instance.id,
+      'email': instance.email,
+      'name': instance.name,
+      'phone': instance.phone,
+      'address': instance.address,
     };

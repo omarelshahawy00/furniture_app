@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/core/theme/colors_manager.dart';
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
-import 'package:ecommerce_app/features/home/data/models/furniture_model.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/item_info_section.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/product_quantity_item.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/select_color_list.dart';

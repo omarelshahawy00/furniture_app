@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemsTotalPriceSection extends StatelessWidget {
-  const ItemsTotalPriceSection({super.key});
+  final double totalPrice;
+
+  const ItemsTotalPriceSection({super.key, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ItemsTotalPriceSection extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '200 \$',
+                '\$${totalPrice.toStringAsFixed(2)} \$',
                 style: Styles.semiBold20
                     .copyWith(color: ColorsManager.primaryColor),
               ),

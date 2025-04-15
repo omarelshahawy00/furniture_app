@@ -71,7 +71,10 @@ class AppRouter {
           GoRoute(
             path: Routes.profileView,
             name: Routes.profileView,
-            builder: (context, state) => const ProfileView(),
+            builder: (context, state) => BlocProvider(
+              create: (context) => LoginCubit( getIt.get<AuthRepo>()),
+              child: const ProfileView(),
+            ),
           ),
         ],
       ),

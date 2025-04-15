@@ -16,3 +16,12 @@ final class LoginSuccess extends LoginState {
   final LoginResModel loginResModel;
   LoginSuccess(this.loginResModel);
 }
+final class LoginSignOutSuccess extends LoginState {
+  final String message;
+  LoginSignOutSuccess(this.message);
+}
+final class LoginSignOutError extends LoginState {
+  final String errMessage;
+  LoginSignOutError(this.errMessage);
+}
+final class LoginSignOutLoading extends LoginState {}

@@ -38,7 +38,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   void _login() {
     if (_formKey.currentState!.validate()) {
       final userData = LoginReqModel(
-        name: _emailController.text,
+        email: _emailController.text,
         password: _passwordController.text,
       );
 
@@ -71,7 +71,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               DefaultTextField(
                 hintText: 'Username',
                 controller: _emailController,
-                validator: MyValidators.displayNameValidator,
+                validator: (email) {
+                  if (email != null && email.isEmpty) {
+                    return 'Email can\'t be empty';
+                  }
+                  return null;
+                },
               ),
               const Gap(19),
               DefaultTextField(
